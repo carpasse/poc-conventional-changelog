@@ -1,0 +1,17 @@
+{
+  "name": "@local/poc-conventional-changelog",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "infra:start": "docker compose up -V -d",
+    "infra:stop": "docker compose down",
+    "infra:setup": "rimraf ./storage && npm run infra:reset && docker compose up --build -V -d",
+    "infra:reset": "npm run infra:stop && docker volume prune -f && docker container prune -f"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "rimraf": "^4.1.2"
+  }
+}

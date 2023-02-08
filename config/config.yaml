@@ -1,0 +1,27 @@
+---
+storage: ../storage
+listen: 4873
+publish:
+  allow_offline: true
+auth:
+  htpasswd:
+    file: ./htpasswd
+    algorithm: bcrypt
+    rounds: 10
+    max_users: 1
+uplinks:
+  private:
+    url: http://localhost:4873
+  npmjs:
+    url: https://registry.npmjs.org/
+packages:
+  "@local/*":
+    access: $all
+    publish: $anonymous
+    proxy: private
+  "**":
+    proxy: npmjs
+logs:
+  - type: stdout
+    format: pretty
+    level: http
