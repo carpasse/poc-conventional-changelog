@@ -8,12 +8,14 @@
     "infra:stop": "docker compose down",
     "infra:setup": "rimraf ./storage && npm run infra:reset && docker compose up --build -V -d",
     "infra:reset": "npm run infra:stop && docker volume prune -f && docker container prune -f",
-    "infra:husky": "husky install",
-    "release": "npx standard-version"
+    "infra:husky": "husky install"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@commitlint/cli": "^17.4.3",
+    "@commitlint/config-conventional": "^17.4.3",
+    "husky": "^8.0.3",
     "rimraf": "^4.1.2"
   }
 }
