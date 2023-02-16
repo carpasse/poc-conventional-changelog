@@ -7,7 +7,9 @@
     "infra:start": "docker compose up -V -d",
     "infra:stop": "docker compose down",
     "infra:setup": "rimraf ./storage && npm run infra:reset && docker compose up --build -V -d",
-    "infra:reset": "npm run infra:stop && docker volume prune -f && docker container prune -f"
+    "infra:reset": "npm run infra:stop && docker volume prune -f && docker container prune -f",
+    "infra:husky": "husky install",
+    "release": "npx standard-version"
   },
   "author": "",
   "license": "MIT",
