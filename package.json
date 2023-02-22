@@ -6,10 +6,17 @@
   "scripts": {
     "infra:start": "docker compose up -V -d",
     "infra:stop": "docker compose down",
-    "infra:setup": "rimraf ./storage && npm run infra:reset && docker compose up --build -V -d",
-    "infra:reset": "npm run infra:stop && docker volume prune -f && docker container prune -f"
+    "infra:reset": "npm run infra:stop && rimraf ./storage && docker volume prune -f && docker container prune -f",
+    "git:delete-tags": "git fetch && git push origin --delete $(git tag -l) && git tag -d $(git tag -l)",
+    "git:rm-last-commit": "git reset --hard HEAD^ && git push origin -f",
+    "lint": "echo \"This project has no linting\"",
+    "test": "echo \"This project has no tests\"",
+    "build": "echo \"This project has no build\""
   },
-  "author": "",
+  "author": {
+    "name": "Carlos Serrano",
+    "url": "https://github.com/carpasse"
+  },
   "license": "MIT",
   "devDependencies": {
     "rimraf": "^4.1.2"
