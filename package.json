@@ -2,7 +2,15 @@
   "name": "@local/poc-conventional-commits",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "",
+  "author": {
+    "name": "Carlos Serrano",
+    "url": "https://github.com/carpasse"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carpasse/poc-conventional-commits.git"
+  },
   "scripts": {
     "infra:start": "docker compose up -V -d",
     "infra:stop": "docker compose down",
@@ -12,10 +20,6 @@
     "lint": "echo \"This project has no linting\"",
     "test": "echo \"This project has no tests\"",
     "build": "echo \"This project has no build\""
-  },
-  "author": {
-    "name": "Carlos Serrano",
-    "url": "https://github.com/carpasse"
   },
   "license": "MIT",
   "devDependencies": {
