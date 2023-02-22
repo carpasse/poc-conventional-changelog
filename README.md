@@ -4,13 +4,13 @@
 
 ### :crystal_ball: About
 
-Doing your commits in [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) format can easly help you automatize CHANGELOG generation, version bumps and GitHub releases. In this POC we propose a setup to easily generate conventional commits, validate them and to automatize releases.
+Doing your commits in [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) format can easily help you automatize CHANGELOG generation, version bumps and GitHub releases. In this POC we propose a setup to easily generate conventional commits, validate them and to automatize releases.
 
 ### Conventional commits types
 
 Conventional Commits only require you to use `fix:` and `feat:` types but other types are allowed. The typical ones are [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) (based on the [Angular convention](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)) recommends `build:`, `chore:`, `ci:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, and others.
 
-Beware that commits with types other than `fix:`, `feat:`, `perf:` and `revert` won't generate a new version nor an entry on the changelogs [by default](https://github.com/conventional-changelog/conventional-changelog/blob/master/packages/conventional-changelog-conventionalcommits/writer-opts.js#L187) at least on JS projects. If you really wan't to change this behaviour you will need to overwrite the default settings of your changelog generator tool.
+Beware that commits with types other than `fix:`, `feat:`, `perf:` and `revert` won't generate a new version nor an entry on the changelogs [by default](https://github.com/conventional-changelog/conventional-changelog/blob/master/packages/conventional-changelog-conventionalcommits/writer-opts.js#L187) at least on JS projects. If you really wan't to change this behavior you will need to overwrite the default settings of your changelog generator tool.
 
 #### Package manager disclaimer
 
@@ -45,7 +45,7 @@ Now, if you try to commit an invalid message you get a validation error :-D
 
 ![commitlint validation error](/docs/assets/commitizen-prompt.png "commitlint validation error")
 
-### How to easly create conventional commits - commitizen, @commitlint/prompt-cli
+### How to easily create conventional commits - commitizen, @commitlint/prompt-cli
 
 To ensure that our commits follow [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) convention can become a tedious task and may be the cause of dislike/rejection of some of you fellow dev team members. Lucky for us there are 2 tools we can use to ease the creation of your conventional commits.
 
@@ -147,11 +147,11 @@ We can now override our `changelog` script to use our custom preset:
 npm pkg set scripts.changelog="npx conventional-changelog -p changelog-preset.js -i CHANGELOG.md -s"
 ```
 
-If we want, we can publish our custom preset as npm package with the [prefix](https://github.com/conventional-changelog/conventional-changelog/blob/master/packages/conventional-changelog-preset-loader/index.js#L40) `conventional-changelog-` for example `conventional-chanelog-one-beyond` and usit in all our projects passing the name with `-p one-beyond`. Although my advice is that you stick to the defaults.
+If we want, we can publish our custom preset as npm package with the [prefix](https://github.com/conventional-changelog/conventional-changelog/blob/master/packages/conventional-changelog-preset-loader/index.js#L40) `conventional-changelog-` for example `conventional-changelog-one-beyond` and use it in all our projects passing the preset `-p one-beyond`.
 
-The rlease workflow we've added now has the following steps:
+The release workflow we've added is the following:
 
-1. Validate our projec (preversion script);
+1. Validate our project (preversion script);
 2. Build the project(version script)
 3. Generate/update our CHANGELOG.md file (version script)
 4. Bump the package version, create a a tag and aversion commit with version bump, build files and CHANGELOG.MD changes (release script)
