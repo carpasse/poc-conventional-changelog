@@ -205,6 +205,5 @@ This will create a github PR with the config files:
 Once you've merged the PR you can create a github release with the following command
 
 ```sh
-release-please github-release --token=$GITHUB_TOKEN --repo-url=carpasse/poc-conventional-commits
-
+npx release-please github-release --token=$GITHUB_TOKEN --repo-url=carpasse/poc-conventional-commits
 ```
