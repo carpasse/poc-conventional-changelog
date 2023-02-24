@@ -180,19 +180,31 @@ From [release-please official documentation](https://github.com/googleapis/relea
 
 There are 2 possible workflows with creating [github action](https://github.com/google-github-actions/release-please-action) (recommended way) and with their [CLI](https://github.com/googleapis/release-please/blob/main/docs/cli.md)
 
+Before starting, you need to [create a new github token](https://github.com/settings/tokens/new)
 ### release-please cli workflow
 ##### Installation and setup
 
 ```sh
 npm install --save-dev release-please
-npx release-please bootstrap \
-  --token=$GITHUB_TOKEN \
-  --repo-url=carpasse/poc-conventional-commits \
-  --release-type=node
+npx release-please bootstrap --token=$GITHUB_TOKEN --repo-url=carpasse/poc-conventional-commits --release-type=node
 ```
 
 This will create a github PR with the config files:
 
 ![release-please bootstrap PR](/docs/assets/release-please_bootstrap_pr.png "release-please bootstrap PR")
 
-Once you have merge it, you can create release commands 
+##### Create a release-pr
+
+```sh
+ npx release-please release-pr --token=$GITHUB_TOKEN --repo-url=carpasse/poc-conventional-commits    
+ ```
+
+**Note** if no release pr gets created, chances are you don't have feat/fix commits or breaking changes in your commit history.
+
+#### Create a Github release
+Once you've merged the PR you can create a github release with the following command
+
+```sh
+release-please github-release --token=$GITHUB_TOKEN --repo-url=carpasse/poc-conventional-commits
+
+```
