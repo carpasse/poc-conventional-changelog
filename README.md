@@ -158,7 +158,8 @@ The release workflow we've added is the following:
 5. Push the changes and the version tag (postversion script)
 6. Publish the package into our private verdaccio registry (postversion script)
 
-#### ~~Publish your release into Github~~   
+#### ~~Publish your release into Github~~
+
 I wanted to use [conventional-github-releaser](https://github.com/conventional-changelog/releaser-tools/tree/master/packages/conventional-github-releaser#conventional-github-releaser) to create a github release but unfortunately the repo is not being actively maintain or at least doesn't look like it. And github rejects the release because the access token is passed via the Authorization header.
 
 ![conventional-github-releaser error](/docs/assets/conventional-github-releaser_error.png "conventional-github-releaser error")
@@ -171,7 +172,13 @@ If they ever fix the issue to use the tool is super easy.
 npm install --save-dev conventional-github-releaser
 npm pkg set scripts.postrelease="conventional-github-releaser -p conventionalcommits -r 0"
 ```
-## release-please release workflows
+
+## standard-version
+
+[Standard-version](https://github.com/conventional-changelog/standard-version) provides a way to automatizes the above steps without the need to understand each step of the process. Unfortunately it is deprecated. And you should probably avoid using it.
+
+## release-please release workflows - For github users only
+
 From [release-please official documentation](https://github.com/googleapis/release-please#release-please)
 
 > Release Please automates CHANGELOG generation, the creation of GitHub releases, and version bumps for your projects.
@@ -181,7 +188,9 @@ From [release-please official documentation](https://github.com/googleapis/relea
 There are 2 possible workflows with creating [github action](https://github.com/google-github-actions/release-please-action) (recommended way) and with their [CLI](https://github.com/googleapis/release-please/blob/main/docs/cli.md)
 
 Before starting, you need to [create a new github token](https://github.com/settings/tokens/new)
+
 ### release-please cli workflow
+
 ##### Installation and setup
 
 ```sh
@@ -196,14 +205,23 @@ This will create a github PR with the config files:
 ##### Create a release-pr
 
 ```sh
- npx release-please release-pr --token=$GITHUB_TOKEN --repo-url=carpasse/poc-conventional-commits    
- ```
+ npx release-please release-pr --token=$GITHUB_TOKEN --repo-url=carpasse/poc-conventional-commits
+```
 
 **Note** if no release pr gets created, chances are you don't have feat/fix commits or breaking changes in your commit history.
 
 #### Create a Github release
+
 Once you've merged the PR you can create a github release with the following command
 
 ```sh
 npx release-please github-release --token=$GITHUB_TOKEN --repo-url=carpasse/poc-conventional-commits
 ```
+
+### release-please github action workflow
+
+Go to [github action](https://github.com/google-github-actions/release-please-action)
+
+## Semantic release
+
+[semantic-release](https://semantic-release.gitbook.io/semantic-release/) automates the whole package release workflow including: determining the next version number, generating the release notes, and publishing the package.
