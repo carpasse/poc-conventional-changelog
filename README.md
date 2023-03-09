@@ -12,6 +12,52 @@ Conventional Commits only require you to use `fix:` and `feat:` types but other 
 
 Beware that commits with types other than `fix:`, `feat:`, `perf:` and `revert` won't generate a new version nor an entry on the changelogs [by default](https://github.com/conventional-changelog/conventional-changelog/blob/master/packages/conventional-changelog-conventionalcommits/writer-opts.js#L187) at least on JS projects. If you really wan't to change this behavior you will need to overwrite the default settings of your changelog generator tool.
 
+## Commit messages recommendations  
+
+When you write a commit do not resume your code changes. Instead show the intent. For example:
+
+```
+feat(gallery): set opacity to 0.5 on, and cursor pointer on hover.
+```
+
+You should instead write the intention of the change:
+
+```
+feat(gallery): Hint users that gallery images are clickable.
+```
+
+In a commit, **to show the intent and the reason of the change** is more important that the actual change. User can always go to the commit itself to see the changes.
+
+Hint: Every time you write a commit image that what you are doing is adding a line to the changelog. That needs to be the mentality.
+
+There are always exceptions to every rule. But they are usually on commits that don't make it into your changelog and in most of the case it is better to show intent. For example:
+
+```
+chore: Upgrade jest to version 28.x.x
+```
+
+could be rewritten to:
+
+```
+chore: Keep testing library up to date
+
+Current version is 28.x.x.
+```
+
+or
+
+```
+perf: Setup project references to improve build performance.
+```
+
+could be rewritten to:
+
+```
+perf: Improve TS build times.
+
+Setup project references to only build packages that change in the monorepo
+```
+
 ##### Package manager disclaimer
 
 This POC has been created using [npm](https://www.npmjs.com/) as the package manager. The mentioned tools do work with other package manager like yarn and pnpm but to install the tools with them, please refer to the official documentation.
@@ -23,13 +69,10 @@ Not everybody will want to use commitizen to create their commits therefore we n
 ##### Installation and setup
 
 ```sh
-# Install commitlint cli and conventional config
-npm install --save-dev @commitlint/{config-conventional,cli}
-# For Windows:
 npm install --save-dev @commitlint/config-conventional @commitlint/cli
 
 # Configure commitlint to use conventional config
-echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
+echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
 ```
 
 To run the linter on each commit we will use husky's commit-msg hook
@@ -43,9 +86,9 @@ npx husky add .husky/commit-msg  'npx --no -- commitlint --edit ${1}'
 
 Now, if you try to commit an invalid message you get a validation error :-D
 
-![commitlint validation error](/docs/assets/commitizen-prompt.png "commitlint validation error")
+![commitlint validation error](/docs/assets/commit-lint-validation-error.png "commitlint validation error")
 
-## Tools to create conventional commits - commitizen, @commitlint/prompt-cli
+## Tools to easily create conventional commits - commitizen
 
 To ensure that our commits follow [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) convention can become a tedious task and may be the cause of dislike/rejection of some of you fellow dev team members. Lucky for us there are 2 tools we can use to ease the creation of your conventional commits.
 
@@ -68,32 +111,15 @@ If you don't want to add a pkg script you can also do:
 npx cz
 ```
 
+![commitizen prompt](/docs/assets/commitizen-prompt.png "commitizen prompt")
+
 Note: there is a cz preset for [JIRA](https://www.npmjs.com/package/@digitalroute/cz-conventional-changelog-for-jira).
-
-### @commitlint/prompt-cli
-
-Commit lint has its own prompt-cli which you can also use
-
-##### Installation and setup
-
-```sh
-# Install and configure if needed
-npm install --save-dev @commitlint/{cli,config-conventional,prompt-cli}
-echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
-npm pkg set scripts.commit="commit"
-```
-
-Same as before, if you don't want to add a pkg script you can also do:
-
-```sh
-npx commit
-```
 
 ## Creating a release workflow with Changelogs and semver version bump
 
 Once we are ready to release our changes we will want to generate a changelog with changes and to bump our package version number. With `conventional-commits` we can automatize this process.
 
-To do so we are going to relay on 2 new cli tools [conventional-changelog-cli](conventional-changelog-cli) and [conventional-recommended-bump](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-recommended-bump#readme).
+To do so we are going to rely on 2 new cli tools [conventional-changelog-cli](conventional-changelog-cli) and [conventional-recommended-bump](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-recommended-bump#readme).
 
 ##### Installation and setup
 
