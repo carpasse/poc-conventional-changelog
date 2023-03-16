@@ -4,7 +4,7 @@
 
 ### :crystal_ball: About
 
-Doing your commits in [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) format can easily help you automatize CHANGELOG generation, version bumps and GitHub releases. In this POC we propose a setup to easily generate conventional commits, validate them and to automatize releases.
+Doing your commits in [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) format can easily help you automatize CHANGELOG generation, version bumps and GitHub releases. In this POC we propose a sample setup to introduce conventional commits and some of the tooling around them.
 
 ## Conventional commits types
 
@@ -14,7 +14,7 @@ Beware that commits with types other than `fix:`, `feat:`, `perf:` and `revert` 
 
 ## Commit messages recommendations
 
-When you write a commit do not resume your code changes. Instead show the intent. For example:
+When you write a commit do not resume your code changes. Instead show the intent. Explain the reason behind the change. For example:
 
 ```
 feat(gallery): set opacity to 0.5 on, and cursor pointer on hover.
@@ -26,11 +26,11 @@ You should instead write the intention of the change:
 feat(gallery): Hint users that gallery images are clickable.
 ```
 
-In a commit, **to show the intent and the reason of the change** is more important that the actual change. User can always go to the commit itself to see the changes.
+In a commit, **to show the intent and the reason of the change** is more important that the actual change. User can always go to the commit itself to see how the changes made.
 
 Hint: Every time you write a commit image that what you are doing is adding a line to the changelog. That needs to be the mentality.
 
-There are always exceptions to every rule. But they are usually on commits that don't make it into your changelog and in most of the case it is better to show intent. For example:
+There are always exceptions to every rule. But they are usually on commits that don't make it into your changelog (`chore`, `perf`, `style`) and in most of the case it is also possible to show the intent. For example:
 
 ```
 chore: Upgrade jest to version 28.x.x
@@ -55,7 +55,7 @@ could be rewritten to:
 ```
 perf: Improve TS build times.
 
-Setup project references to only build packages that change in the monorepo
+Setup project references to only build packages that change in the monorepo.
 ```
 
 ##### Package manager disclaimer
@@ -90,11 +90,9 @@ Now, if you try to commit an invalid message you get a validation error :-D
 
 ## Tools to easily create conventional commits - commitizen
 
-To ensure that our commits follow [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) convention can become a tedious task and may be the cause of dislike/rejection of some of you fellow dev team members. Lucky for us there are 2 tools we can use to ease the creation of your conventional commits.
+[Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) convention can become a tedious task and may be the cause of dislike/rejection of some of you fellow dev team members. Lucky for us there are tools we can use to ease the creation of your conventional commits. My favorite is [commitizen](https://www.npmjs.com/package/commitizen).
 
 ### Commitizen
-
-One of the tools we can use is commitizen
 
 ##### Installation and setup
 
@@ -115,7 +113,7 @@ npx cz
 
 Note: there is a cz preset for [JIRA](https://www.npmjs.com/package/@digitalroute/cz-conventional-changelog-for-jira).
 
-## Creating a release workflow with Changelogs and semver version bump
+## Creating a release workflow with Changelogs and [semver](https://semver.org/lang/es/) version bump
 
 Once we are ready to release our changes we will want to generate a changelog with changes and to bump our package version number. With `conventional-commits` we can automatize this process.
 
