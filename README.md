@@ -12,7 +12,7 @@ Conventional Commits only require you to use `fix:` and `feat:` types but other 
 
 Beware that commits with types other than `fix:`, `feat:`, `perf:` and `revert` won't generate a new version nor an entry on the changelogs [by default](https://github.com/conventional-changelog/conventional-changelog/blob/master/packages/conventional-changelog-conventionalcommits/writer-opts.js#L187) at least on JS projects. If you really wan't to change this behavior you will need to overwrite the default settings of your changelog generator tool.
 
-## Commit messages recommendations  
+## Commit messages recommendations
 
 When you write a commit do not resume your code changes. Instead show the intent. For example:
 
@@ -170,10 +170,10 @@ module.exports = config({
 We can now override our `changelog` script to use our custom preset:
 
 ```sh
-npm pkg set scripts.changelog="npx conventional-changelog -p changelog-preset.js -i CHANGELOG.md -s"
+npm pkg set scripts.changelog="npx conventional-changelog -p $(pwd)/changelog-preset.js -i CHANGELOG.md -s"
 ```
 
-If we want, we can publish our custom preset as npm package with the [prefix](https://github.com/conventional-changelog/conventional-changelog/blob/master/packages/conventional-changelog-preset-loader/index.js#L40) `conventional-changelog-` for example `conventional-changelog-one-beyond` and use it in all our projects passing the preset `-p one-beyond`.
+**IMPORTANT**: Notice the pwd concatenation to generate an absolute path. `conventional-changelog` only accepts absolute paths or package names with the `conventional-changelog-` [prefix](https://github.com/conventional-changelog/conventional-changelog/blob/master/packages/conventional-changelog-preset-loader/index.js#L40) for example `conventional-changelog-one-beyond` and use it in all our projects passing the preset `-p one-beyond`.
 
 The release workflow we've added is the following:
 
