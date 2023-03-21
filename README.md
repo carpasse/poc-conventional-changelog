@@ -4,13 +4,68 @@
 
 ### :crystal_ball: About
 
-Using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) format can help you easily automate CHANGELOG generation, version bumps, and GitHub releases. This POC provides a sample setup to introduce conventional commits and some of the tooling around them.
+Using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) specification to write your commits, can help you easily automate CHANGELOG generation, version bumps, and GitHub releases. This POC provides a sample setup to introduce conventional commits and some of the tooling around them.
 
 ## Conventional Commit Types
 
-Conventional Commits only require you to use `fix:` and `feat:` types but other types are allowed. The recommended ones, according to [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) (based on the [Angular convention](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)), are `build:`, `chore:`, `ci:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, and others.
+[Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) only require you to use `fix:` and `feat:` types but other types are allowed. The recommended ones, according to [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) (based on the [Angular convention](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)), are `build:`, `chore:`, `ci:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, and others.
+
+### Commit Message Format
+
+Each commit message consists of a **header**, a **body** and a **footer**. The header has a special format that includes a **type**, a **scope** and a **subject**:
+
+```
+<type>(<scope>): <subject>
+<BLANK LINE>
+<body>
+<BLANK LINE>
+<footer>
+```
+
+### Types
+
+- `build`: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- `ci`: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
+- `docs`: Documentation only changes
+- `feat`: A new feature
+- `fix`: A bug fix
+- `perf`: A code change that improves performance
+- `refactor`: A code change that neither fixes a bug nor adds a feature
+- `style`: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- `test`: Adding missing tests or correcting existing tests
 
 Please note that commits with types other than `fix:`, `feat:`, `perf:` and `revert` will not generate a new version or an entry on the changelog [by default](https://github.com/conventional-changelog/conventional-changelog/blob/master/packages/conventional-changelog-conventionalcommits/writer-opts.js#L187), at least on JavaScript projects. If you want to change this behavior, you will need to overwrite the default settings of your changelog generator tool.
+
+### Scope
+
+The scope should be the name of the npm package affected (as perceived by the person reading the changelog generated from commit messages, no need to add the full package name).
+
+There are a few exceptions to the "use package name" rule:
+
+- `packaging`: used for changes that change the npm package layout e.g. public path changes, package.json changes done to all packages, d.ts file/format changes, changes to bundles, etc.
+- `changelog`: used for updating the release notes in CHANGELOG.md
+- `none/empty string`: useful for `style`, `test` and `refactor` changes that are done across all packages (e.g. `style: add missing semicolons`)
+- Widely used devDependencies like `jest`, `webpack`, `cypress`, useful for `chore` changes.
+
+### Subject
+
+The subject contains a succinct description of the change:
+
+- use the imperative, present tense: "change" not "changed" nor "changes"
+- don't capitalize the first letter
+- no dot (.) at the end
+
+### Body
+
+Just as in the **subject**, use the imperative, present tense: "change" not "changed" nor "changes".
+
+The body should include the motivation for the change and contrast this with previous behavior.
+
+### Footer
+
+The footer should contain any information about **Breaking Changes** and is also the place to reference any issues that this commit **affects** or **closes**.
+
+**BREAKING CHANGE**: a commit that has a footer `BREAKING CHANGE:`, or appends a `!` after the `type/scope`, introduces a breaking API change (correlating with [`MAJOR`](http://semver.org/#summary) in Semantic Versioning). A _BREAKING CHANGE_ can be part of commits of any type.
 
 ## Commit Message Recommendations
 
@@ -23,42 +78,40 @@ feat(gallery): set opacity to 0.5 on, and cursor pointer on hover.
 You should instead write the intention of the change:
 
 ```sh
-feat(gallery): Hint users that gallery images are clickable.
+feat(gallery): hint users that images are clickable.
 ```
 
 In a commit, **showing the intent and the reason for the change is more important than the actual change**. Users can always go to the commit itself to see how the changes were made.
 
-Hint: Every time you write a commit, imagine that you are adding a line to the changelog. This should be your mentality.
+**Hint**: Every time you write a commit, imagine that you are adding a line to the changelog. This should be your mentality.
 
 There are always exceptions to every rule. But they are usually on commits that don't make it into your changelog (`chore`, `perf`, `style`) and in most cases, it is also possible to show the intent. For example:
 
 ```
-chore: Upgrade jest to version 28.x.x
+chore: upgrade jest to version 28.x.x
 ```
 
 could be rewritten to:
 
 ```
-chore: Keep testing library up to date
-
-Current version is 28.x.x.
+chore(jest): upgrade to latest version 28.x.x
 ```
 
 or
 
 ```
-chore: Setup project references to improve build performance.
+chore: setup project references to improve build performance
 ```
 
 could be rewritten to:
 
 ```
-chore: Improve TS build times.
+chore(typescript): Use composite and project references.
 
-Setup project references to only build packages that change in the monorepo.
+Improve TS build times by setting project references to only build packages that change in the monorepo.
 ```
 
-##### Package Manager Disclaimer
+## Package Manager Disclaimer
 
 This POC has been created using [npm](https://www.npmjs.com/) as the package manager. The mentioned tools do work with other package managers like yarn and pnpm, but to install the tools with them, please refer to the official documentation.
 
