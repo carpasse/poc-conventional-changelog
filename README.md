@@ -8,7 +8,7 @@ Using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) spe
 
 ## Conventional Commit Types
 
-[Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) only require you to use `fix:` and `feat:` types but other types are allowed. The recommended ones, according to [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) (based on the [Angular convention](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)), are `build:`, `chore:`, `ci:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, and others.
+[Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) specificcation only requires you to use `fix:` and `feat:` types but other types are allowed. The recommended ones, according to [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) (based on the [Angular convention](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)), are `build:`, `chore:`, `ci:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, and others.
 
 ### Commit Message Format
 
@@ -24,15 +24,16 @@ Each commit message consists of a **header**, a **body** and a **footer**. The h
 
 ### Types
 
-- `build`: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
-- `ci`: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
-- `docs`: Documentation only changes
 - `feat`: A new feature
 - `fix`: A bug fix
 - `perf`: A code change that improves performance
+- `revert`: A code revert (Git default revert message also works)
+- `docs`: Documentation only changes
 - `refactor`: A code change that neither fixes a bug nor adds a feature
 - `style`: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 - `test`: Adding missing tests or correcting existing tests
+- `build` \ `chore`: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- `ci`: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
 
 Please note that commits with types other than `fix:`, `feat:`, `perf:` and `revert` will not generate a new version or an entry on the changelog [by default](https://github.com/conventional-changelog/conventional-changelog/blob/master/packages/conventional-changelog-conventionalcommits/writer-opts.js#L187), at least on JavaScript projects. If you want to change this behavior, you will need to overwrite the default settings of your changelog generator tool.
 
@@ -106,20 +107,22 @@ chore: setup project references to improve build performance
 could be rewritten to:
 
 ```
-chore(typescript): Use composite and project references.
+chore(typescript): use composite and project references.
 
-Improve TS build times by setting project references to only build packages that change in the monorepo.
+Improve TS build times by setting project references to only build packages that have changed in the monorepo.
 ```
 
-## Package Manager Disclaimer
+## Sample Setup
+
+### Package Manager Disclaimer
 
 This POC has been created using [npm](https://www.npmjs.com/) as the package manager. The mentioned tools do work with other package managers like yarn and pnpm, but to install the tools with them, please refer to the official documentation.
 
-## Enforcing Conventional Commits Convention with `commitlint`
+### Enforcing Conventional Commits Convention with `commitlint`
 
 Not everybody will want to use commitizen to create their commits. Therefore, we need to add some validation to prevent invalid pushes to the git server. To do so, we will use [`commitlint`](https://commitlint.js.org/#/).
 
-##### Installation and Setup
+###### Installation and Setup
 
 ```sh
 npm install --save-dev @commitlint/config-conventional @commitlint/cli
@@ -141,13 +144,13 @@ Now, if you try to commit an invalid message you get a validation error :-D
 
 ![commitlint validation error](/docs/assets/commit-lint-validation-error.png "commitlint validation error")
 
-## Tools to Easily Create Conventional Commits - `commitizen`
+### Tools to Easily Create Conventional Commits - `commitizen`
 
 To follow [Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) convention can become a tedious task and may be the cause of dislike or rejection by some of you fellow dev team members. Lucky for us there are tools we can use to ease the creation of your conventional commits. My favorite is [`commitizen`](https://www.npmjs.com/package/commitizen).
 
-### Commitizen
+#### Commitizen
 
-##### Installation and setup
+###### Installation and setup
 
 ```sh
 npm install --save-dev commitizen
@@ -166,13 +169,13 @@ npx cz
 
 Note: there is a cz preset for [JIRA](https://www.npmjs.com/package/@digitalroute/cz-conventional-changelog-for-jira).
 
-## Creating a Release Workflow with Changelogs and [Semver](https://semver.org/lang/es/) Version Bump
+### Creating a Release Workflow with Changelogs and [Semver](https://semver.org/lang/es/) Version Bump
 
 If our commits follow the `conventional-commits` convention, we can automatize the generation of a changelog with the changes and even bump the package version following the [semver](https://semver.org/lang/es/) convention.
 
 To do so we are going to rely on 2 new cli tools [conventional-changelog-cli](conventional-changelog-cli) and [conventional-recommended-bump](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-recommended-bump#readme).
 
-##### Installation and Setup
+###### Installation and Setup
 
 ```sh
 npm install --save-dev conventional-changelog-cli conventional-recommended-bump
@@ -188,7 +191,7 @@ npm pkg set scripts.postversion="git push && git push --tags && npm publish"
 npm pkg set scripts.release="npm version $(npx conventional-recommended-bump -p conventionalcommits)"
 ```
 
-#### How to extend `conventional-commits` Preset to Match your Needs
+##### How to extend `conventional-commits` Preset to Match your Needs
 
 You could create your own preset using conventional-commits preset as a start.
 
@@ -235,7 +238,7 @@ The release workflow we've added is the following:
 5. Push the changes and the version tag (postversion script)
 6. Publish the package into our private verdaccio registry (postversion script)
 
-#### ~~Publish your release into Github~~
+##### ~~Publish your release into Github~~
 
 I wanted to use [conventional-github-releaser](https://github.com/conventional-changelog/releaser-tools/tree/master/packages/conventional-github-releaser#conventional-github-releaser) to create a github release but unfortunately the repo is not being actively maintain or at least doesn't look like it. And github rejects the release because the access token is passed via the Authorization header.
 
@@ -243,18 +246,18 @@ I wanted to use [conventional-github-releaser](https://github.com/conventional-c
 
 If they ever fix the issue to use the tool is super easy.
 
-##### Installation and Setup
+###### Installation and Setup
 
 ```sh
 npm install --save-dev conventional-github-releaser
 npm pkg set scripts.postrelease="conventional-github-releaser -p conventionalcommits -r 0"
 ```
 
-## `standard-version`
+### `standard-version`
 
 [Standard-version](https://github.com/conventional-changelog/standard-version) provides a way to automatizes the above steps without the need to understand each step of the process. Unfortunately it is deprecated. And you should probably avoid using it.
 
-## `release-please` Manual Release Workflows - For github users only
+### `release-please` Manual Release Workflows - For github users only
 
 From [release-please official documentation](https://github.com/googleapis/release-please#release-please)
 
@@ -266,9 +269,9 @@ There are 2 possible workflows with creating [github action](https://github.com/
 
 Before starting, you need to [create a new github token](https://github.com/settings/tokens/new)
 
-### release-please CLI Workflow
+#### release-please CLI Workflow
 
-##### Installation and Setup
+###### Installation and Setup
 
 ```sh
 npm install --save-dev release-please
@@ -279,7 +282,7 @@ This will create a github PR with the config files:
 
 ![release-please bootstrap PR](/docs/assets/release-please_bootstrap_pr.png "release-please bootstrap PR")
 
-##### Create a Release PR
+###### Create a Release PR
 
 ```sh
  npx release-please release-pr --token=$GITHUB_TOKEN --repo-url=carpasse/poc-conventional-commits
@@ -287,7 +290,7 @@ This will create a github PR with the config files:
 
 **Note** if no release pr gets created, chances are you don't have feat/fix commits or breaking changes in your commit history.
 
-#### Create a Github Release
+##### Create a Github Release
 
 Once you've merged the PR you can create a github release with the following command
 
@@ -295,10 +298,10 @@ Once you've merged the PR you can create a github release with the following com
 npx release-please github-release --token=$GITHUB_TOKEN --repo-url=carpasse/poc-conventional-commits
 ```
 
-### `release-please` Github Action Workflow
+#### `release-please` Github Action Workflow
 
 Go to [github action](https://github.com/google-github-actions/release-please-action)
 
-## Semantic Release
+### Semantic Release
 
 [semantic-release](https://semantic-release.gitbook.io/semantic-release/) automates the whole package release workflow including: determining the next version number, generating the release notes, and publishing the package.
