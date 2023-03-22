@@ -16,9 +16,9 @@ Each commit message consists of a **header**, a **body** and a **footer**. The h
 
 ```
 <type>(<scope>): <subject>
-<BLANK LINE>
+[<BLANK LINE>]
 <body>
-<BLANK LINE>
+[<BLANK LINE>]
 <footer>
 ```
 
@@ -111,6 +111,52 @@ chore(typescript): use composite and project references.
 
 Improve TS build times by setting project references to only build packages that have changed in the monorepo.
 ```
+
+### Examples
+
+```
+feat(auth): Add Google login functionality
+
+This commit adds the ability for users to log in with their Google accounts, improving the user authentication experience.
+
+#345, #456
+
+---
+
+fix(cart): Fix checkout button not working
+
+The checkout button was not working due to a syntax error in the code. This commit fixes the error and ensures that the button works as expected.
+
+Fixes #234
+
+---
+
+refactor(profile): Remove redundant code
+
+This commit removes redundant code in the user profile section, improving the performance and readability of the codebase.
+
+
+---
+
+test(auth): Add unit tests for login function
+
+This commit adds unit tests for the login function to ensure that it works as expected and to catch any future regressions.
+
+#567
+
+---
+
+docs(readme)!: Update installation instructions
+
+This commit updates the installation instructions in the README file to make them more clear and concise.
+
+BREAKING CHANGE: The installation command has changed from "npm install" to "yarn install".
+
+---
+
+```
+
+Note that the blank lines are optional and can be omitted. The separator line (`---`) is also optional but is often used to separate the different components of the commit message for better readability this is known as a _ footer token/separator_ in the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 
 ## Sample Setup
 
