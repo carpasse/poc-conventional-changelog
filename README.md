@@ -16,9 +16,9 @@ Each commit message consists of a **header**, a **body** and a **footer**. The h
 
 ```
 <type>(<scope>): <subject>
-[<BLANK LINE>]
+<BLANK LINE>
 <body>
-[<BLANK LINE>]
+<BLANK LINE>
 <footer>
 ```
 
@@ -50,7 +50,7 @@ There are a few exceptions to the "use package name" rule:
 
 ### Subject
 
-The subject contains a succinct description of the change:
+The subject contains a short description of the change:
 
 - use the imperative, present tense: "change" not "changed" nor "changes"
 - don't capitalize the first letter
@@ -70,16 +70,16 @@ The footer should contain any information about **Breaking Changes** and is also
 
 ## Commit Message Recommendations
 
-When you write a commit, do not describe your code changes. Instead, show the intent and explain the reason behind the change. For example:
+When you write a commit message, do not describe your code does. Instead, show what has changed and the motivation behind the change. For example:
 
 ```sh
-feat(gallery): set opacity to 0.5 on, and cursor pointer on hover.
+feat(gallery): set opacity to 0.5 and cursor pointer on hover
 ```
 
 You should instead write the intention of the change:
 
 ```sh
-feat(gallery): hint users that images are clickable.
+feat(gallery): show users clickable images
 ```
 
 In a commit, **showing the intent and the reason for the change is more important than the actual change**. Users can always go to the commit itself to see how the changes were made.
@@ -107,7 +107,7 @@ chore: setup project references to improve build performance
 could be rewritten to:
 
 ```
-chore(typescript): use composite and project references.
+chore(typescript): use composite and project references
 
 Improve TS build times by setting project references to only build packages that have changed in the monorepo.
 ```
