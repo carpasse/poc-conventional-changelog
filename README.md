@@ -156,7 +156,7 @@ BREAKING CHANGE: The installation command has changed from "npm install" to "yar
 
 ```
 
-Note that the blank lines are optional and can be omitted. The separator line (`---`) is also optional but is often used to separate the different components of the commit message for better readability this is known as a _ footer token/separator_ in the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
+Note that the blank lines are optional and can be omitted. The separator line (`---`) is also optional but is often used to separate the different components of the commit message for better readability this is known as a _footer token/separator_ in the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 
 ## Sample Setup
 
