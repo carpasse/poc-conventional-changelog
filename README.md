@@ -37,7 +37,7 @@ Each commit message consists of a **header**, a **body** and a **footer**. The h
 
 Please note that commits with types other than `fix:`, `feat:`, `perf:` and `revert` will not generate a new version or an entry on the changelog [by default](https://github.com/conventional-changelog/conventional-changelog/blob/master/packages/conventional-changelog-conventionalcommits/writer-opts.js#L187), at least on JavaScript projects. If you want to change this behavior, you will need to overwrite the default settings of your changelog generator tool.
 
-### Scope
+### [Scope]
 
 The scope should be the name of the npm package affected (as perceived by the person reading the changelog generated from commit messages, no need to add the full package name).
 
@@ -45,8 +45,9 @@ There are a few exceptions to the "use package name" rule:
 
 - `packaging`: used for changes that change the npm package layout e.g. public path changes, package.json changes done to all packages, d.ts file/format changes, changes to bundles, etc.
 - `changelog`: used for updating the release notes in CHANGELOG.md
-- `none/empty string`: useful for `style`, `test` and `refactor` changes that are done across all packages (e.g. `style: add missing semicolons`)
 - Widely used devDependencies like `jest`, `webpack`, `cypress`, useful for `chore` changes.
+
+**Note:** - It is optional and usually omitted in `style`, `test` and `refactor` changes that are done across all packages (e.g. `style: add missing semicolons`)
 
 ### Subject
 
@@ -56,15 +57,17 @@ The subject contains a short description of the change:
 - don't capitalize the first letter
 - no dot (.) at the end
 
-### Body
+### [Body]
 
 Just as in the **subject**, use the imperative, present tense: "change" not "changed" nor "changes".
 
 The body should include the motivation for the change and contrast this with previous behavior.
 
-### Footer
+### [Footer]
 
 The footer should contain any information about **Breaking Changes** and is also the place to reference any issues that this commit **affects** or **closes**.
+
+#### BREAKING CHANGES
 
 **BREAKING CHANGE**: a commit that has a footer `BREAKING CHANGE:`, or appends a `!` after the `type/scope`, introduces a breaking API change (correlating with [`MAJOR`](http://semver.org/#summary) in Semantic Versioning). A _BREAKING CHANGE_ can be part of commits of any type.
 
@@ -79,7 +82,7 @@ feat(gallery): set opacity to 0.5 and cursor pointer on hover
 You should instead write the intention of the change:
 
 ```sh
-feat(gallery): show users clickable images
+feat(gallery): style images on hover to show they are clickable
 ```
 
 In a commit, **showing the intent and the reason for the change is more important than the actual change**. Users can always go to the commit itself to see how the changes were made.
@@ -101,7 +104,7 @@ chore(jest): upgrade to latest version 28.x.x
 or
 
 ```
-chore: setup project references to improve build performance
+chore: setup project references
 ```
 
 could be rewritten to:
