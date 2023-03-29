@@ -6,13 +6,9 @@
 
 Using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) specification to write your commits, can help you easily automate CHANGELOG generation, version bumps, and GitHub releases. This POC provides a sample setup to introduce conventional commits and some of the tooling around them.
 
-## Conventional Commit Types
-
-[Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) specification only requires you to use `fix:` and `feat:` types but other types are allowed. The recommended ones, according to [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) (based on the [Angular convention](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)), are `build:`, `chore:`, `ci:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, and others.
-
 ### Commit Message Format
 
-Each commit message consists of a **header**, a **body** and a **footer**. The header has a special format that includes a **type**, a **scope** and a **subject**:
+Each commit message consists of a **header**, an optional **body** and an optional **footer**. The header has a special format that includes a **type**, an optional **scope** and a **subject**:
 
 ```
 <type>(<scope>): <subject>
@@ -21,6 +17,10 @@ Each commit message consists of a **header**, a **body** and a **footer**. The h
 <BLANK LINE>
 <footer>
 ```
+
+### Conventional Commit Types
+
+[Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) specification only requires you to use `fix:` and `feat:` types but other types are allowed. The recommended ones, according to [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) (based on the [Angular convention](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)), are `build:`, `chore:`, `ci:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, and others.
 
 ### Types
 
@@ -118,7 +118,7 @@ Improve TS build times by setting project references to only build packages that
 ### Examples
 
 ```
-feat(auth): Add Google login functionality
+feat(auth): add Google login functionality
 
 This commit adds the ability for users to log in with their Google accounts, improving the user authentication experience.
 
@@ -126,7 +126,7 @@ This commit adds the ability for users to log in with their Google accounts, imp
 
 ---
 
-fix(cart): Fix checkout button not working
+fix(cart): fix checkout button not working
 
 The checkout button was not working due to a syntax error in the code. This commit fixes the error and ensures that the button works as expected.
 
@@ -134,14 +134,14 @@ Fixes #234
 
 ---
 
-refactor(profile): Remove redundant code
+refactor(profile): remove redundant code
 
 This commit removes redundant code in the user profile section, improving the performance and readability of the codebase.
 
 
 ---
 
-test(auth): Add unit tests for login function
+test(auth): add unit tests for login function
 
 This commit adds unit tests for the login function to ensure that it works as expected and to catch any future regressions.
 
@@ -149,7 +149,7 @@ This commit adds unit tests for the login function to ensure that it works as ex
 
 ---
 
-docs(readme)!: Update installation instructions
+docs(readme)!: update installation instructions
 
 This commit updates the installation instructions in the README file to make them more clear and concise.
 
